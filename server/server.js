@@ -1,6 +1,7 @@
 import { Server } from 'socket.io'
-import { createServer } from "http";
-import path from 'path';
+import { createServer } from "http"
+import path from 'path'
+import { v4 as uuidv4 } from 'uuid'
 
 const __dirname = path.resolve();
 
@@ -16,9 +17,21 @@ const io = new Server(server, {
 // });
 
 io.on('connection', (socket) => {
-  io.sockets.emit('user connected', {
+
+  let newRoom = uuidv4()
+  console.log("a new player connected", socket.client.id);
+
+  socket.join(newRoom)
+
+  io.sockets.emit('new player', {
     name:"omar"
   });
+
+  socket.on('game', data => {
+    console.log(data)
+    console.log(socket.client.id)
+  })
+
 });
 
 server.listen(5000, () => {
