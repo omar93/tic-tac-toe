@@ -1,7 +1,6 @@
 import { Server } from 'socket.io'
 import { createServer } from "http"
 import path from 'path'
-import { v4 as uuidv4 } from 'uuid'
 
 const __dirname = path.resolve();
 
@@ -18,18 +17,23 @@ const io = new Server(server, {
 
 io.on('connection', (socket) => {
 
-  let newRoom = uuidv4()
-  console.log("a new player connected", socket.client.id);
+  console.log("this person connected:",socket.id);
 
-  socket.join(newRoom)
 
-  io.sockets.emit('new player', {
-    name:"omar"
-  });
+  socket.on('create-game', gridSize => {
+    socket.join("room1")
 
-  socket.on('game', data => {
-    console.log(data)
-    console.log(socket.client.id)
+  })
+  io.to('room1').emit("hi");
+
+
+  socket.on('join', roomID => {
+    console.log("player -", socket.client.id, ' is now joining:', roomID);
+    socket.join(roomID)
+  })
+
+  socket.on('play', data => {
+    console.log(socket);
   })
 
 });

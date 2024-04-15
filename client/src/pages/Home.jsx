@@ -8,7 +8,7 @@ function Home() {
         </button>
       </a>
       <br />
-      <a href="lobby">
+      <a href="new">
         <button>
           Join Lobby
         </button>

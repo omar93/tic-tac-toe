@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Game from './pages/Game'
 import Lobby from "./pages/Lobby"
 import Layout from "./pages/Layout"
+import New from "./pages/New"
 import './App.css'
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="lobby" element={<Lobby />} />
           <Route path="game" element={<Game />} />
+          <Route path="new" element={<New />} />
         </Route>
       </Routes>
     </BrowserRouter>
