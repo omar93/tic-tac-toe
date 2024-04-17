@@ -6,7 +6,8 @@ function Game() {
   const gridSize = location.state.boardSize
 
   const tileStyle = {
-    border: "1px solid white"
+    border: "1px solid black",
+    color: "black"
   }
 
   const grid = () => {
@@ -19,7 +20,8 @@ function Game() {
           row={Math.ceil(i/gridSize)}
           column={i%gridSize === 0 ? gridSize : i%gridSize}
           tile={i}
-          key={i}>{i}
+          key={i}>
+            {i}
         </div>
       )
     }
@@ -27,10 +29,12 @@ function Game() {
   }
 
   const gridBoardStyle = {
-    backgroundColor: "green",
+    backgroundColor: "white",
     display: "grid",
     gridTemplateColumns: "repeat("+gridSize+",1fr)",
-    gridTemplateRows: "repeat("+gridSize+",1fr)"
+    gridTemplateRows: "repeat("+gridSize+",1fr)",
+    width: "800px",
+    height: "800px"
   }
   
   return (
