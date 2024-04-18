@@ -9,7 +9,6 @@ function New() {
 
   const joinRoom = () => {
     socket.emit('join', room)
-    // navigate(`/lobby/${room}`, { state: { boardSize: boardSize } })
   }
 
   useEffect(() => {
@@ -18,7 +17,7 @@ function New() {
     })
 
     socket.on('response', data => {
-      console.log(data);
+      navigate(`/lobby/${data.room}`, { state: { boardSize: room.grid } })
     })
   }, [socket])
 

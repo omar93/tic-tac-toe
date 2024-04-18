@@ -11,7 +11,7 @@ function Lobby() {
   
   const startGame = () => {
     setPlaying(true)
-    navigate(`/lobby/${uuidv4()}`, { state: { boardSize: boardSize } })
+    navigate(`/lobby/${uuidv4()}`, { state: { boardSize: boardSize, ingame: true } })
   }
   
   return (
