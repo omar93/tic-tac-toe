@@ -30,7 +30,6 @@ function Lobby() {
           <br />
           <br />
           <button onClick={startGame}>Start game</button>
-          <button onClick={() => navigate(-1)}>back</button>
         </div>
       )}
     </>

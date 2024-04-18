@@ -6,14 +6,23 @@ function Game() {
 
   const location = useLocation()
   const gridSize = location.state.boardSize
+  const { id } = useParams();
 
-  socket.emit('playGame', {gridSize:gridSize, room:"room1"})
+  console.log("grid:", gridSize, " id:", id);
 
-  let { id } = useParams();
+  socket.emit('playGame', {
+    gridSize:gridSize, 
+    room:id
+  })
+
   
   useEffect(() => {
     socket.on('boardSize', data => {
       console.log("got board from opponent:", data);
+    })
+
+    socket.on('welcome', data => {
+      console.log(data)
     })
   }, [socket])
 

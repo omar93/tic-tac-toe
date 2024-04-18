@@ -1,29 +1,35 @@
-import { useState } from "react"
-// import { socket } from "../lib/socket"
+import { useState, useEffect } from "react"
+import { socket } from "../lib/socket"
+import { useNavigate } from "react-router-dom";
 
 function New() {
 
-
-
-  const [state, setState] = useState('tja')
+  const [room, setRoom] = useState('tja')
+  const navigate = useNavigate ();
 
   const joinRoom = () => {
-    console.log("room we want to join:", state);
-    socket.emit('join', state)
+    socket.emit('join', room)
+    // navigate(`/lobby/${room}`, { state: { boardSize: boardSize } })
   }
 
-  const startGame = () => {
-    socket.emit('play')
-  }
+  useEffect(() => {
+    socket.on('hi', data => {
+      console.log(data)
+    })
+
+    socket.on('response', data => {
+      console.log(data);
+    })
+  }, [socket])
+
 
   return ( 
     <div>
-      new game welcome
+      Lobby ID:
       <input type="text" 
-      onChange={e => setState(e.target.value)}/>
+      onChange={e => setRoom(e.target.value)}/>
       <br />
       <button onClick={joinRoom}>Join room</button>
-      <button onClick={startGame}>Play</button>
     </div>
    );
 }
