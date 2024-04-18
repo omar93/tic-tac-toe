@@ -1,6 +1,4 @@
-// import { socket } from './lib/socket'
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useState } from 'react'
+import { BrowserRouter, Routes, Route  } from "react-router-dom"
 import Home from './pages/Home'
 import Game from './pages/Game'
 import Lobby from "./pages/Lobby"
@@ -9,24 +7,20 @@ import New from "./pages/New"
 import './App.css'
 
 function App() {
-  const [ingame, setIngame] = useState(false)
-  const createLobby = () => {
-    setIngame(true)
-  }
   
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="lobby" element={<Lobby />} />
-          <Route path="game" element={<Game />} />
+        <Route path="/" element={<Layout/>}>
+          <Route index element={<Home/>} />
+          <Route path="lobby" element={<Lobby/>} >
+            <Route path=":id" element={<Game/>}/>
+          </Route>
           <Route path="new" element={<New />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  );
-
+  )
 
 }
 

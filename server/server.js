@@ -24,8 +24,10 @@ io.on('connection', (socket) => {
     socket.join("room1")
 
   })
-  io.to('room1').emit("hi");
 
+  socket.on('playGame', boardSize => {
+    socket.emit("boardSize",boardSize)
+  })
 
   socket.on('join', roomID => {
     console.log("player -", socket.client.id, ' is now joining:', roomID);

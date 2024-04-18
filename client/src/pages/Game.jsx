@@ -1,9 +1,21 @@
-import { useLocation } from "react-router-dom"
+import { useEffect } from "react"
+import { socket } from "../lib/socket.js"
+import { useLocation, useParams } from "react-router-dom"
 
 function Game() {
 
   const location = useLocation()
   const gridSize = location.state.boardSize
+
+  socket.emit('playGame', {gridSize:gridSize, room:"room1"})
+
+  let { id } = useParams();
+  
+  useEffect(() => {
+    socket.on('boardSize', data => {
+      console.log("got board from opponent:", data);
+    })
+  }, [socket])
 
   const tileStyle = {
     border: "1px solid black",

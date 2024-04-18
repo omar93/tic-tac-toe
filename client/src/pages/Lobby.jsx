@@ -1,25 +1,40 @@
 import { useState } from "react"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Outlet  } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid'
 
 function Lobby() {
 
   const [boardSize, setBoardSize] = useState(0)
-  const navigate = useNavigate()
+  const [playing, setPlaying] = useState(false)
+
+  const navigate = useNavigate ();
   
   const startGame = () => {
-    navigate('/game', { state: { boardSize: boardSize } })
+    setPlaying(true)
+    navigate(`/lobby/${uuidv4()}`, { state: { boardSize: boardSize } })
   }
-
+  
   return (
-    <div>
-      <span>Board size: </span>
-      <input type="number" name="boardSize" id="boardSizeInput" 
-        onChange={e => setBoardSize(e.target.value)}
-      />
-      <br></br>
-      <button onClick={startGame}>Start game</button>
-    </div>
-  )
+    <>
+      {playing ? (
+        <Outlet />
+      ) : (
+        <div>
+          <span>Board size: </span>
+          <input 
+            type="number" 
+            name="boardSize" 
+            id="boardSizeInput" 
+            onChange={e => setBoardSize(parseInt(e.target.value))}
+          />
+          <br />
+          <br />
+          <button onClick={startGame}>Start game</button>
+          <button onClick={() => navigate(-1)}>back</button>
+        </div>
+      )}
+    </>
+  );
 
 }
 
