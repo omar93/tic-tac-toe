@@ -15,24 +15,18 @@ function Lobby() {
   }
   
   return (
-    <>
-      {playing ? (
-        <Outlet />
-      ) : (
-        <div>
-          <span>Board size: </span>
-          <input 
-            type="number" 
-            name="boardSize" 
-            id="boardSizeInput" 
-            onChange={e => setBoardSize(parseInt(e.target.value))}
-          />
-          <br />
-          <br />
-          <button onClick={startGame}>Start game</button>
-        </div>
-      )}
-    </>
+    <div>
+      <span>Board size: </span>
+      <input 
+        type="number" 
+        name="boardSize" 
+        id="boardSizeInput" 
+        onChange={e => setBoardSize(parseInt(e.target.value))}
+      />
+      <br />
+      <br />
+      <button onClick={startGame}>Start game</button>
+    </div>
   );
 
 }

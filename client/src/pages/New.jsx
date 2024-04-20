@@ -17,7 +17,8 @@ function New() {
     })
 
     socket.on('response', data => {
-      navigate(`/lobby/${data.room}`, { state: { boardSize: room.grid } })
+      console.log("response data:", data);
+      navigate(`/lobby/${data.room}`, { state: { boardSize: data.gridSize } })
     })
   }, [socket])
 
